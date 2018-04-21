@@ -45,7 +45,7 @@ from bitbutter.client import Client
 user_client = Client(api_key, api_secret, base_uri, partnership_id, user_id)
 ```
 
-Follow the partner or user API [documentation](https://docs.bitbutter.com/) to see all endpoints. API reference documentation will be made available with [readthedocs.org](https://readthedocs.org/).
+Follow the partner or user API [documentation](https://docs.bitbutter.com/) to see all endpoints. Chainbridge API reference documentation is available [here](https://polyledger.github.io/chainbridge).
 
 ## Testing / Contributing
 
