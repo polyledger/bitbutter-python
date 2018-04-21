@@ -1,8 +1,11 @@
-# Chainbridge
+Chainbridge
+===========
 
-A Python library for the [Bitbutter API](https://docs.bitbutter.com/).
+A Python library for the `Bitbutter API <https://docs.bitbutter.com/>`_.
 
-## Features
+
+Features
+^^^^^^^^
 
 * Convenient methods for making calls to the API
 
