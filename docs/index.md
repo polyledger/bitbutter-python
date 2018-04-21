@@ -1,3 +1,3 @@
-# Welcome to bitbutter-python
+# Welcome to Chainbridge
 
-For source code visit the [repository](https://github.com/polyledger/bitbutter-python) on GitHub.
+For source code visit the [repository](https://github.com/polyledger/chainbridge) on GitHub.
