@@ -134,8 +134,12 @@ Update the version in `bitbutter/__init__.py`
 python setup.py sdist upload -r pypitest
 ```
 
+The latest version will be available [here](https://test.pypi.org/project/chainbridge/)
+
 ### Upload to PyPI Live
 
 ```
 python setup.py sdist upload -r pypi
 ```
+
+The latest version will be available [here](https://pypi.org/project/chainbridge/)
