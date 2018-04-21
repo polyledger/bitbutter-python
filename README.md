@@ -27,7 +27,7 @@ easy_install chainbridge
 
 The library is currently tested against Python versions 3.4+.
 
-## Documentation
+## Quick Start
 
 Create a partner `Client` object for interacting with the API:
 
