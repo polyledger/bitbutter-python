@@ -1,0 +1,4 @@
+site_name: bitbutter-python
+pages:
+    - Home: index.md
+theme: readthedocs
