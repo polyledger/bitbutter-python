@@ -96,3 +96,46 @@ mkdocs serve
 The documentation will be live at `http://127.0.0.1:8000`.
 
 Documentation is built with the `mkdocs build`.
+
+## Distribution
+
+You should have a `.pyirc` configuration file in your home folder (`~/.pyirc`) containing authentication credentials for TestPyPI and PyPI
+
+```
+[distutils]
+index-servers =
+  pypi
+  pypitest
+
+[pypi]
+repository=https://pypi.python.org/pypi
+username=your_username
+password=your_password
+
+[pypitest]
+repository=https://testpypi.python.org/pypi
+username=your_username
+password=your_password
+```
+
+Ideally, with strict permissions:
+
+```
+chmod 600 ~/.pyirc
+```
+
+### Update Version
+
+Update the version in `bitbutter/__init__.py`
+
+### Upload to PyPI Test
+
+```
+python setup.py sdist upload -r pypitest
+```
+
+### Upload to PyPI Live
+
+```
+python setup.py sdist upload -r pypi
+```
