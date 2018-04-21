@@ -18,6 +18,7 @@ setup(
     license='MIT',
     description='Bitbutter API client library',
     long_description=README,
+    long_description_content_type='text/x-rst',
     url='https://github.com/polyledger/chainbridge/',
     download_url='https://github.com/polyledger/chainbridge/tarball/%s'
         % (bitbutter.__version__),
