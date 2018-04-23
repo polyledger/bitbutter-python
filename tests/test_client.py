@@ -163,12 +163,12 @@ class TestClient(unittest2.TestCase):
         data=mock_item)
     def test_connect_exchange(self):
         client = Client(user_api_key, user_secret, base_uri, user_id=user_id)
-        params = {
+        body = {
             'credentials': {
                 'api_key': user_api_key,
                 'secret': user_secret
             },
             'exchange_id': exchange_id
         }
-        response = client.connect_exchange(params=params)
+        response = client.connect_exchange(body)
         self.assertEqual(response.json()['data'], mock_item)
