@@ -41,9 +41,9 @@ class Client(object):
                     and key != 'partnership_id':
                     raise ValueError
 
-        self.user_id = user_id
-        self.partner_id = partner_id
-        self.partnership_id = partnership_id
+        self.user_id = str(user_id)
+        self.partner_id = str(partner_id)
+        self.partnership_id = str(partnership_id)
         self.BASE_API_URI = base_uri
 
         # Set up a requests session for interacting with the API.
@@ -83,6 +83,9 @@ class Client(object):
             raise build_api_error(response)
         return response
 
+    def _set_user_id(self, user_id):
+        self.user_id = str(user_id) if user_id is not None else self.user_id
+
     def _get(self, *args, **kwargs):
         return self._request('get', *args, **kwargs)
 
@@ -99,8 +102,9 @@ class Client(object):
         response = self._post(*path)
         return response
 
-    def delete_user(self, user_id):
-        path = ['v1', 'users', user_id]
+    def delete_user(self, user_id=None):
+        self._set_user_id(user_id)
+        path = ['v1', 'users', self.user_id]
         response = self._delete(*path)
         return response
 
@@ -111,13 +115,15 @@ class Client(object):
 
     """ User API """
 
-    def get_user_balance(self):
-        path = ['v1', 'users', self.user_id, 'balances']
+    def get_user_balance(self, user_id=None):
+        self._set_user_id(user_id)
+        path = ['v1', 'users', str(self.user_id), 'balances']
         response = self._get(*path)
         return response
 
-    def get_user_ledger(self):
-        path = ['v1', 'users', self.user_id, 'ledger']
+    def get_user_ledger(self, user_id=None):
+        self._set_user_id(user_id)
+        path = ['v1', 'users', str(self.user_id), 'ledger']
         response = self._get(*path)
         return response
 
@@ -131,7 +137,8 @@ class Client(object):
         response = self._get(*path)
         return response
 
-    def get_user_connected_exchanges(self):
+    def get_user_connected_exchanges(self, user_id=None):
+        self._set_user_id(user_id)
         path = ['v1', 'users', self.user_id, 'connected-exchanges']
         response = self._get(*path)
         return response
