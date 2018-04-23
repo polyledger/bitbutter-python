@@ -6,11 +6,9 @@ from __future__ import unicode_literals
 
 import json
 import requests
+from urllib.parse import urljoin
 
 from bitbutter.auth import HMACAuth
-from bitbutter.compat import imap
-from bitbutter.compat import quote
-from bitbutter.compat import urljoin
 from bitbutter.error import build_api_error
 
 
@@ -68,7 +66,7 @@ class Client(object):
         Raises an APIError if the response is not 20X. Otherwise, returns the
         response object. Not intended for direct use by API consumers.
         """
-        uri = urljoin(self.BASE_API_URI, '/'.join(imap(quote, path)))
+        uri = urljoin(self.BASE_API_URI, '/'.join(path))
         data = kwargs.get('data', None)
         if data and isinstance(data, dict):
             kwargs['data'] = json.dumps(data, separators=(',', ':'))
