@@ -57,14 +57,14 @@ class TestClient(unittest2.TestCase):
         client = Client(partner_api_key, partner_secret, base_uri=base_uri)
         assert isinstance(client, Client)
 
-    def key_and_secret_required(self):
+    def test_key_and_secret_required(self):
         with self.assertRaises(ValueError):
             Client(None, partner_secret, base_uri, partner_id=partner_id)
         with self.assertRaises(ValueError):
             Client(partner_api_key, None, base_uri, partner_id=partner_id)
 
     @mock_response(httpretty.GET, 'test', {})
-    def auth_succeeds_with_bytes_and_unicode(self):
+    def test_auth_succeeds_with_bytes_and_unicode(self):
         self.assertIsInstance(partner_api_key, six.text_type)  # Unicode
         self.assertIsInstance(partner_secret, six.text_type)  # Unicode
 
@@ -82,7 +82,7 @@ class TestClient(unittest2.TestCase):
         self.assertEqual(client._get('test').status_code, 200)
 
     @httpretty.activate
-    def request_includes_auth_headers(self):
+    def test_request_includes_auth_headers(self):
         client = Client(partner_api_key, partner_secret, base_uri,
                         partner_id=partner_id, partnership_id=partnership_id,
                         user_id=user_id)
@@ -120,7 +120,7 @@ class TestClient(unittest2.TestCase):
         method=httpretty.POST,
         uri=create_user_route,
         data=mock_item)
-    def create_user(self):
+    def test_create_user(self):
         client = Client(partner_api_key, partner_secret, base_uri,
                         partner_id=partner_id, partnership_id=partnership_id)
         response = client.create_user()
@@ -130,7 +130,7 @@ class TestClient(unittest2.TestCase):
         method=httpretty.DELETE,
         uri=delete_user_route,
         data=mock_item)
-    def delete_user(self):
+    def test_delete_user(self):
         client = Client(partner_api_key, partner_secret, base_uri,
                         partner_id=partner_id, partnership_id=partnership_id)
         response = client.delete_user(user_id)
@@ -140,7 +140,7 @@ class TestClient(unittest2.TestCase):
         method=httpretty.GET,
         uri=get_all_users_route,
         data=mock_collection)
-    def get_all_users(self):
+    def test_get_all_users(self):
         client = Client(partner_api_key, partner_secret, base_uri,
                         partner_id=partner_id, partnership_id=partnership_id)
         response = client.get_all_users()
@@ -152,7 +152,7 @@ class TestClient(unittest2.TestCase):
         method=httpretty.GET,
         uri=get_all_exchanges_route,
         data=mock_collection)
-    def get_all_exchanges(self):
+    def test_get_all_exchanges(self):
         client = Client(user_api_key, user_secret, base_uri, user_id=user_id)
         response = client.get_all_exchanges()
         self.assertEqual(response.json()['data'], mock_collection)
@@ -161,7 +161,7 @@ class TestClient(unittest2.TestCase):
         method=httpretty.POST,
         uri=connect_exchange_route,
         data=mock_item)
-    def connect_exchange(self):
+    def test_connect_exchange(self):
         client = Client(user_api_key, user_secret, base_uri, user_id=user_id)
         params = {
             'credentials': {
