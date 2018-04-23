@@ -99,6 +99,8 @@ Documentation is built with the `mkdocs build`.
 
 ## Distribution
 
+### Prerequisites
+
 You should have a `.pyirc` configuration file in your home folder (`~/.pyirc`) containing authentication credentials for TestPyPI and PyPI
 
 ```
@@ -112,7 +114,7 @@ repository=https://pypi.python.org/pypi
 username=your_username
 password=your_password
 
-[pypitest]
+[testpypi]
 repository=https://testpypi.python.org/pypi
 username=your_username
 password=your_password
@@ -124,6 +126,12 @@ Ideally, with strict permissions:
 chmod 600 ~/.pyirc
 ```
 
+Also make sure `wheel` is installed:
+
+```
+pip install wheel
+```
+
 ### Update Version
 
 Update the version in `bitbutter/__init__.py`
@@ -131,7 +139,7 @@ Update the version in `bitbutter/__init__.py`
 ### Upload to PyPI Test
 
 ```
-python setup.py sdist upload -r pypitest
+python setup.py sdist bdist_wheel upload -r testpypi
 ```
 
 The latest version will be available [here](https://test.pypi.org/project/chainbridge/)
@@ -139,7 +147,7 @@ The latest version will be available [here](https://test.pypi.org/project/chainb
 ### Upload to PyPI Live
 
 ```
-python setup.py sdist upload -r pypi
+python setup.py sdist bdist_wheel upload -r pypi
 ```
 
 The latest version will be available [here](https://pypi.org/project/chainbridge/)
