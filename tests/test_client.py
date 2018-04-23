@@ -47,6 +47,8 @@ get_all_users_route = '/v1/partnerships/' + partnership_id + '/users'
 get_all_exchanges_route = '/v1/exchanges'
 connect_exchange_route = '/v1/connected-exchanges'
 get_user_balance_route = '/v1/users/' + user_id + '/balances'
+get_user_connected_exchanges_route = ('/v1/users/' + user_id +
+                                      '/connected-exchanges')
 
 mock_item = {'key1': 'val1', 'key2': 'val2'}
 mock_collection = [mock_item, mock_item]
@@ -172,3 +174,12 @@ class TestClient(unittest2.TestCase):
         }
         response = client.connect_exchange(body)
         self.assertEqual(response.json()['data'], mock_item)
+
+    @mock_response(
+        method=httpretty.GET,
+        uri=get_user_connected_exchanges_route,
+        data=mock_collection)
+    def test_get_user_connected_exchanges(self):
+        client = Client(user_api_key, user_secret, base_uri, user_id=user_id)
+        response = client.get_user_connected_exchanges()
+        self.assertEqual(response.json()['data'], mock_collection)
