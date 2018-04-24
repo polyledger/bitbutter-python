@@ -54,7 +54,7 @@ class Client(object):
         self.session.headers.update({
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'User-Agent': 'Bitbutter/python/1.0'
+            'User-Agent': 'Chainbridge/python/1.0'
         })
 
         if self.user_id:
