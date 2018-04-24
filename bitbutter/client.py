@@ -85,6 +85,7 @@ class Client(object):
 
     def _set_user_id(self, user_id):
         self.user_id = str(user_id) if user_id is not None else self.user_id
+        self.session.headers.update({'BB-USER-ID': self.user_id})
 
     def _get(self, *args, **kwargs):
         return self._request('get', *args, **kwargs)

@@ -85,9 +85,6 @@ class TestClient(unittest2.TestCase):
 
     @httpretty.activate
     def test_request_includes_auth_headers(self):
-        client = Client(partner_api_key, partner_secret, base_uri,
-                        partner_id=partner_id, partnership_id=partnership_id,
-                        user_id=user_id)
 
         def server_response(request, uri, response_headers):
             headers = ['BB-ACCESS-KEY', 'BB-ACCESS-SIGN', 'BB-TIMESTAMP',
@@ -105,15 +102,21 @@ class TestClient(unittest2.TestCase):
             return 400, response_headers, '{}'
 
         # Test a partner route
+        partner_client = Client(partner_api_key, partner_secret, base_uri,
+                                partner_id=partner_id,
+                                partnership_id=partnership_id)
         url = base_uri + get_all_users_route
         httpretty.register_uri(httpretty.GET, url, server_response)
-        response = client.get_all_users()
+        response = partner_client.get_all_users()
         self.assertEqual(response.status_code, 200)
 
         # Test a user route
+        user_client = Client(user_api_key, user_secret, base_uri,
+                             partner_id=partner_id,
+                             partnership_id=partnership_id)
         url = base_uri + get_user_balance_route
         httpretty.register_uri(httpretty.GET, url, server_response)
-        response = client.get_user_balance()
+        response = user_client.get_user_balance(user_id)
         self.assertEqual(response.status_code, 200)
 
     """ Partner routes """
