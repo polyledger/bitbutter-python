@@ -41,9 +41,11 @@ class Client(object):
                     and key != 'partnership_id':
                     raise ValueError
 
-        self.user_id = str(user_id)
-        self.partner_id = str(partner_id)
-        self.partnership_id = str(partnership_id)
+        def to_string(x): return str(x) if x is not None else None
+
+        self.user_id = to_string(user_id)
+        self.partner_id = to_string(partner_id)
+        self.partnership_id = to_string(partnership_id)
         self.BASE_API_URI = base_uri
 
         # Set up a requests session for interacting with the API.

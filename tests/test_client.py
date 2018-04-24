@@ -94,9 +94,11 @@ class TestClient(unittest2.TestCase):
                 self.assertNotEqual(request.headers[header], '')
 
             if 'BB-PARTNER-ID' in request.headers:
+                self.assertNotIn('BB-USER-ID', request.headers)
                 return 200, response_headers, '{}'
 
             if 'BB-USER-ID' in request.headers:
+                self.assertNotIn('BB-PARTNER-ID', request.headers)
                 return 200, response_headers, '{}'
 
             return 400, response_headers, '{}'
@@ -111,9 +113,7 @@ class TestClient(unittest2.TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Test a user route
-        user_client = Client(user_api_key, user_secret, base_uri,
-                             partner_id=partner_id,
-                             partnership_id=partnership_id)
+        user_client = Client(user_api_key, user_secret, base_uri)
         url = base_uri + get_user_balance_route
         httpretty.register_uri(httpretty.GET, url, server_response)
         response = user_client.get_user_balance(user_id)
