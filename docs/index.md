@@ -39,7 +39,7 @@ import os
 from bitbutter.client import Client
 
 partner_api_key = os.environ['BITBUTTER_API_KEY']
-partner_secret = os.environ['BITBUTTER_API_SECRET']
+partner_secret = os.environ['BITBUTTER_SECRET']
 base_uri = os.environ['BITBUTTER_BASE_URI']
 partner_id = os.environ['BITBUTTER_PARTNER_ID']
 partnership_id = os.environ['BITBUTTER_PARTNERSHIP_ID']
@@ -73,15 +73,12 @@ First create a user client
 import os
 from bitbutter.client import Client
 
-partner_api_key = os.environ['BITBUTTER_API_KEY']
-partner_secret = os.environ['BITBUTTER_API_SECRET']
+user_api_key = os.environ['BITBUTTER_API_KEY']
+user_secret = os.environ['BITBUTTER_SECRET']
 base_uri = os.environ['BITBUTTER_BASE_URI']
-partner_id = os.environ['BITBUTTER_PARTNER_ID']
-partnership_id = os.environ['BITBUTTER_PARTNERSHIP_ID']
+user_id = os.environ['BITBUTTER_USER_ID']
 
-user_id = 'some user id'
-
-user_client = Client(partner_api_key, partner_secret, base_uri, partner_id=partner_id, partnership_id=partnership_id, user_id=user_id)
+user_client = Client(user_api_key, user_secret, base_uri, user_id=user_id)
 ```
 
 ### Get user balance
@@ -91,7 +88,7 @@ user_client = Client(partner_api_key, partner_secret, base_uri, partner_id=partn
 ### Connect exchange
 
 ```python
-params = {
+payload = {
     'credentials': {
         'api_key': user_api_key,
         'secret': user_secret
@@ -99,7 +96,7 @@ params = {
     'exchange_id': exchange_id
 }
 
-user_client.connect_exchange(params=params)
+user_client.connect_exchange(payload)
 ```
 
 ### Get all exchanges
@@ -109,6 +106,10 @@ user_client.get_all_exchanges()
 ```
 
 ### Get user connected exchanges
+
+```python
+user_client.get_user_connected_exchanges()
+```
 
 ### Get connected exchange balances
 
