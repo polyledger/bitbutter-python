@@ -1,4 +1,4 @@
-# Chainbridge
+# Bitbutter Python Client
 
 A Python library for the [Bitbutter API](https://docs.bitbutter.com/).
 
